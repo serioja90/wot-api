@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-08 01:32:18
+# @Last Modified time: 2014-07-08 02:03:45
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -86,6 +86,8 @@ module Wot
   end
 end
 
+
 require 'wot-api/clusters'
 require 'wot-api/parser'
 require 'wot-api/error'
+require 'wot-api/version'

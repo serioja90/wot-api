@@ -1,6 +1,11 @@
+
+$:.unshift File.expand_path("../lib", __FILE__)
+
+require 'wot-api/version'
+
 Gem::Specification.new do |s|
   s.name        = "wot-api"
-  s.version     = "0.0.1"
+  s.version     = Wot::Api::VERSION
   s.authors     = ["Groza Sergiu"]
   s.email       = "info@code-panic.com"
   s.homepage    = "http://code-panic.com/wot-api"
@@ -15,7 +20,8 @@ Gem::Specification.new do |s|
                    "lib/wot-api/player.rb",
                    "lib/wot-api/player_list.rb",
                    "lib/wot-api/player_statistics.rb",
-                   "lib/wot-api/statistics.rb"
+                   "lib/wot-api/statistics.rb",
+                   "lib/wot-api/version.rb"
                   ]
 
   s.add_development_dependency "json","~> 1.8"
