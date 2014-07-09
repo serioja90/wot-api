@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-09 01:14:08
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 02:27:05
+# @Last Modified time: 2014-07-09 22:54:15
 module Wot
   class Vehicle
     attr_accessor :id, :mark_of_mastery, :battles, :wins
@@ -24,9 +24,14 @@ module Wot
       unless @info
         response = api.tank_info @id
         fail "Cannot retrieve tank info" if response.instance_of?(Wot::Error)
-        self.info = Wot::VehicleInfo.new(response[:data][@id.to_s],api)
+        @info = Wot::VehicleInfo.new(response[:data][@id.to_s],api)
       end
       return @info
+    end
+
+    def method_missing(method_name, *args, &block)
+      info
+      return @info.send method_name unless @info.nil?
     end
   end
 end

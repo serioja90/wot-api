@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 02:13:57
+# @Last Modified time: 2014-07-10 01:32:17
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -39,6 +39,15 @@ module Wot
       end
     end
 
+    def player_achievements(account_id)
+      response = make_request "account/achievements/", {:account_id => account_id}
+      if response.instance_of?(Wot::Error)
+        return response
+      else
+        return Wot::Parser.get_player_achievements(response[:data][account_id.to_s],self)
+      end
+    end
+
     def player_stats(account_id,hours_ago)
       return make_request "stats/accountbytime/", {:account_id => account_id, :hours_ago => hours_ago}
     end
@@ -56,7 +65,11 @@ module Wot
     end
 
     def achievements_list()
-      return make_request "encyclopedia/achievements/", {}
+      unless @achievements
+        response = make_request "encyclopedia/achievements/", {}
+        @achievements = Wot::Parser.get_achievements_list(response[:data])
+      end
+      return @achievements
     end
 
     def engines_list()

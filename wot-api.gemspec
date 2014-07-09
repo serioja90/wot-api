@@ -12,18 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "World of Tanks API v2.0!"
   s.description = "A simple library that allows to interface with World of Tanks API v2.0!"
   s.license     = "MIT"
-  s.files       = ["lib/wot-api.rb",
-                   "lib/wot-api/achievement.rb",
-                   "lib/wot-api/clusters.rb",
-                   "lib/wot-api/error.rb",
-                   "lib/wot-api/parser.rb",
-                   "lib/wot-api/player.rb",
-                   "lib/wot-api/player_statistics.rb",
-                   "lib/wot-api/statistics.rb",
-                   "lib/wot-api/vehicle.rb",
-                   "lib/wot-api/vehicle_info.rb",
-                   "lib/wot-api/version.rb"
-                  ]
+  s.files       = `git ls-files lib`.split("\n")
 
   s.add_development_dependency "json","~> 1.8"
   s.add_development_dependency "rest-client","~> 1.7"

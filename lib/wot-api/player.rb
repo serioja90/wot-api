@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 02:15:22
+# @Last Modified time: 2014-07-09 23:19:09
 module Wot
   class Player
     attr_accessor :id, :nickname
@@ -24,6 +24,13 @@ module Wot
         @vehicles = api.player_vehicles(@id)
       end
       return @vehicles
+    end
+
+    def achievements
+      unless @achievements
+        @achievements = api.player_achievements(@id)
+      end
+      return @achievements
     end
 
     def info
