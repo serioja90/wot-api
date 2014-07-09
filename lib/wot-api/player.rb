@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-08 01:31:13
+# @Last Modified time: 2014-07-09 02:15:22
 module Wot
   class Player
     attr_accessor :id, :nickname
@@ -19,9 +19,16 @@ module Wot
       return @statistics
     end
 
+    def vehicles
+      unless @vehicles
+        @vehicles = api.player_vehicles(@id)
+      end
+      return @vehicles
+    end
+
     def info
       unless @info
-        response = @api.players_info([@id.to_s])
+        response = api.players_info([@id.to_s])
         unless response.instance_of?(Wot::Error)
           self.info = response[:data]
         end
@@ -55,6 +62,12 @@ module Wot
 
     def logout_at
       return Time.at(info[:logout_at])
+    end
+
+    private
+
+    def api
+      return @api
     end
   end
 end

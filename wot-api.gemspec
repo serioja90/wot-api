@@ -18,9 +18,10 @@ Gem::Specification.new do |s|
                    "lib/wot-api/error.rb",
                    "lib/wot-api/parser.rb",
                    "lib/wot-api/player.rb",
-                   "lib/wot-api/player_list.rb",
                    "lib/wot-api/player_statistics.rb",
                    "lib/wot-api/statistics.rb",
+                   "lib/wot-api/vehicle.rb",
+                   "lib/wot-api/vehicle_info.rb",
                    "lib/wot-api/version.rb"
                   ]
 

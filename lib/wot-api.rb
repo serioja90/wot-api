@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-08 02:03:45
+# @Last Modified time: 2014-07-09 02:13:57
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -31,7 +31,12 @@ module Wot
     end
 
     def player_vehicles(account_id)
-      return make_request "account/tanks/", {:account_id => account_id}
+      response = make_request "account/tanks/", {:account_id => account_id}
+      if response.instance_of?(Wot::Error)
+        return response
+      else
+        return Wot::Parser.get_player_vehicles(response[:data][account_id.to_s],self)
+      end
     end
 
     def player_stats(account_id,hours_ago)
