@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-09 01:14:08
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 22:54:15
+# @Last Modified time: 2014-07-10 02:01:01
 module Wot
   class Vehicle
     attr_accessor :id, :mark_of_mastery, :battles, :wins
@@ -12,6 +12,11 @@ module Wot
       @mark_of_mastery = data[:mark_of_mastery]
       @battles = data[:statistics][:battles]
       @wins = data[:statistics][:wins]
+    end
+
+    def respond_to?(method_name)
+      info
+      return @info && @info.respond_to?(method_name)
     end
 
     private

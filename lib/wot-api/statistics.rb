@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-08 00:38:07
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 23:49:37
+# @Last Modified time: 2014-07-10 01:57:01
 module Wot
   class Statistics
     def initialize(data)
@@ -19,6 +19,10 @@ module Wot
 
     def hits_percent
       return shots.to_f / hits.to_f
+    end
+
+    def respond_to?(method_name)
+      return @data.keys.include? method_name
     end
 
     private

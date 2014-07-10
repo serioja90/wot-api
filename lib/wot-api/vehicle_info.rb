@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-09 01:27:58
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 23:48:56
+# @Last Modified time: 2014-07-10 01:57:15
 module Wot
   class VehicleInfo
     def initialize(data,api)
@@ -30,6 +30,10 @@ module Wot
     end
 
     def turrets
+    end
+
+    def respond_to?(method_name)
+      return @data.keys.include? method_name
     end
 
     private

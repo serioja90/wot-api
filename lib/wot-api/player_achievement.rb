@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-10 00:51:08
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-10 01:25:45
+# @Last Modified time: 2014-07-10 02:01:28
 module Wot
   class PlayerAchievement
     attr_accessor :name, :count, :max_series
@@ -18,6 +18,11 @@ module Wot
         @achievement = api.achievements_list[@name]
       end
       return @achievement
+    end
+
+    def responds_to?(method_name)
+      achievement
+      return @achievement && @achievement.responds_to?(method_name)
     end
 
     private
