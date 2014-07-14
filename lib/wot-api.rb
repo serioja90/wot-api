@@ -2,15 +2,12 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-15 01:37:53
+# @Last Modified time: 2014-07-15 01:47:52
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
 
 module Wot
-  if defined? Rails
-    require 'wot-api'
-  end
   class Api
     def initialize(region, language = 'en')
       cluster = Wot::cluster(region)
