@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-10 01:32:17
+# @Last Modified time: 2014-07-15 00:30:12
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -27,7 +27,12 @@ module Wot
 
     def players_info(account_ids)
       ids = (account_ids.class == Array ? account_ids : [account_ids])
-      return make_request "account/info/", {:account_id => ids.join(",")}
+      response = make_request "account/info/", {:account_id => ids.join(",")}
+      if response.instance_of?(Wot::Error)
+        return response
+      else
+        return Wot::Parser.get_players_info(response[:data])
+      end
     end
 
     def player_vehicles(account_id)
