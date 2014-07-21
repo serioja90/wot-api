@@ -2,10 +2,10 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-08 01:56:43
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-09 00:55:19
+# @Last Modified time: 2014-07-22 01:23:01
 module Wot
   class Api
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
 
     def self.version
       return VERSION

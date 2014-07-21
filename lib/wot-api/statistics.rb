@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-08 00:38:07
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-10 01:57:01
+# @Last Modified time: 2014-07-22 01:22:12
 module Wot
   class Statistics
     def initialize(data)
@@ -10,7 +10,7 @@ module Wot
     end
 
     def data
-      return data
+      return @data
     end
 
     def battle_avg_exp
@@ -28,7 +28,7 @@ module Wot
     private
 
     def method_missing(method_name, *args, &block)
-      return data[method_name]
+      return @data[method_name]
     end
   end
 end
