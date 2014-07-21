@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-15 00:13:51
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-15 00:29:46
+# @Last Modified time: 2014-07-22 00:29:02
 module Wot
   class PlayerInfo
     def initialize(data)
@@ -29,6 +29,10 @@ module Wot
 
     def logout_at
       return Time.at @data[:logout_at]
+    end
+
+    def updated_at
+      return Time.at @data[:updated_at]
     end
 
     def respond_to?(method_name)
