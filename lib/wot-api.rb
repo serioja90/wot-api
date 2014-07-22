@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-15 01:47:52
+# @Last Modified time: 2014-07-22 23:43:31
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -22,6 +22,17 @@ module Wot
         return response
       else
         return Wot::Parser.get_players_list(response[:data],self)
+      end
+    end
+
+    def find(account_ids)
+      ids = (account_ids.class == Array ? account_ids : [account_ids])
+      fields = [:account_id, :nickname]
+      response = make_request "account/info/", {:account_id => ids.join(","), :fields => fields.join(",")}
+      if response.instance_of?(Wot::Error)
+        return response
+      else
+        return Wot::Parser.get_players_list(response[:data].values,self)
       end
     end
 

@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-08 00:22:27
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-10 01:57:24
+# @Last Modified time: 2014-07-22 23:45:21
 module Wot
   class Achievement
     def initialize(data)
@@ -10,7 +10,7 @@ module Wot
     end
 
     def data
-      return data
+      return @data
     end
 
     def responds_to?(method_name)
