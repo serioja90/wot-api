@@ -2,12 +2,16 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-23 01:46:55
+# @Last Modified time: 2014-07-24 00:26:59
 
 require 'wot-api/error'
 
 module Wot
   class Player
+    autoload :Info,         'wot-api/player/info'
+    autoload :Tank,         'wot-api/player/tank'
+    autoload :Achievement,  'wot-api/player/achievement'
+
     attr_accessor :id, :nickname
     def initialize(options,api)
       @api = api
