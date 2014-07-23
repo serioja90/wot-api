@@ -8,10 +8,10 @@ require 'wot-api/player'
 require 'wot-api/vehicle'
 require 'wot-api/player_achievement'
 require 'wot-api/achievement'
-require 'wot-api/player_info'
 
 module Wot
   module Parser
+    
     module_function
 
     def get_players_list(data,api)
@@ -45,14 +45,6 @@ module Wot
         achievements[name] = Wot::Achievement.new(item)
       end
       return achievements
-    end
-
-    def get_players_info(data)
-      players_info = {}
-      data.each do |id,item|
-        players_info[id.to_s] = Wot::PlayerInfo.new(item)
-      end
-      return players_info
     end
   end
 end

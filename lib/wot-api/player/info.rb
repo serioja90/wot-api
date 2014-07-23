@@ -2,36 +2,29 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-23 23:13:08
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 00:29:43
+# @Last Modified time: 2014-07-24 01:42:32
 
 module Wot
   class Player
     class Info
-      def initialize()
-      end
+      attr_accessor :player, :data, :api
 
-      def initialize(data,api,skip_methods = [])
-        @data = data
+      def initialize(player, api)
+        @player = player
         @api = api
-        skip_methods = skip_methods.map{|item| item.to_s}
-        @data.each do |key,value|
-          self.send(key.to_s) unless skip_methods.include?(key.to_s)
+        response = api.players_info(player.id)
+        @data = response[:data][player.id.to_s]
+        @data.each do |key,_|
+          self.send key
         end
       end
 
-      def data
-        return @data
-      end
-
-      def respond_to?(method_name)
-        return @data.keys.include? method_name
+      def statistics
+        @statistics ||= Wot::Player::Statistics.new(@data[:statistics])
+        return @statistics
       end
 
       protected
-
-      def api
-        return api
-      end
 
       def method_missing(method_name, *args, &block)
         self.class.instance_eval do

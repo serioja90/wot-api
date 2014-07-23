@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-23 01:45:31
+# @Last Modified time: 2014-07-24 01:02:39
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -18,50 +18,29 @@ module Wot
 
     def search(username)
       response = make_request "account/list/", {:search => username}
-      if response.instance_of?(Wot::Error)
-        return response
-      else
-        return Wot::Parser.get_players_list(response[:data],self)
-      end
+      return Wot::Parser.get_players_list(response[:data],self)
     end
 
     def find(account_ids)
       ids = (account_ids.class == Array ? account_ids : [account_ids])
       fields = [:account_id, :nickname]
       response = make_request "account/info/", {:account_id => ids.join(","), :fields => fields.join(",")}
-      if response.instance_of?(Wot::Error)
-        return response
-      else
-        return Wot::Parser.get_players_list(response[:data].values,self)
-      end
+      return Wot::Parser.get_players_list(response[:data].values,self)
     end
 
     def players_info(account_ids)
       ids = (account_ids.class == Array ? account_ids : [account_ids])
-      response = make_request "account/info/", {:account_id => ids.join(",")}
-      if response.instance_of?(Wot::Error)
-        return response
-      else
-        return Wot::Parser.get_players_info(response[:data])
-      end
+      return make_request "account/info/", {:account_id => ids.join(",")}
     end
 
     def player_vehicles(account_id)
       response = make_request "account/tanks/", {:account_id => account_id}
-      if response.instance_of?(Wot::Error)
-        return response
-      else
-        return Wot::Parser.get_player_vehicles(response[:data][account_id.to_s],self)
-      end
+      return Wot::Parser.get_player_vehicles(response[:data][account_id.to_s],self)
     end
 
     def player_achievements(account_id)
       response = make_request "account/achievements/", {:account_id => account_id}
-      if response.instance_of?(Wot::Error)
-        return response
-      else
-        return Wot::Parser.get_player_achievements(response[:data][account_id.to_s],self)
-      end
+      return Wot::Parser.get_player_achievements(response[:data][account_id.to_s],self)
     end
 
     def player_stats(account_id,hours_ago)
@@ -109,11 +88,8 @@ module Wot
       params[:params][:language] = @language
       response = JSON.parse(RestClient.get("#{@base_url}/2.0/#{suffix}", params))
       response = response.nested_under_indifferent_access
-      if response[:status].downcase == "error"
-        return Wot::Error.new(response[:error])
-      else
-        return response
-      end
+      raise Wot::Error.new(response[:error]) if response[:status].downcase == "error"
+      return response
     end
   end
 end

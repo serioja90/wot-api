@@ -2,20 +2,23 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 00:26:59
+# @Last Modified time: 2014-07-24 01:42:51
 
 require 'wot-api/error'
 
 module Wot
   class Player
-    autoload :Info,         'wot-api/player/info'
-    autoload :Tank,         'wot-api/player/tank'
-    autoload :Achievement,  'wot-api/player/achievement'
+    autoload :Info,                   'wot-api/player/info'
+    autoload :Tank,                   'wot-api/player/tank'
+    autoload :Achievement,            'wot-api/player/achievement'
+    autoload :Statistics,             'wot-api/player/statistics'
+    autoload :ExtendedStatistics,     'wot-api/player/extended_statistics'
 
-    attr_accessor :id, :nickname
+    attr_accessor :id, :account_id, :nickname, :api
     def initialize(options,api)
       @api = api
       @id = options[:account_id]
+      @account_id = @id
       @nickname = options[:nickname]
     end
 
@@ -34,20 +37,11 @@ module Wot
     end
 
     def info
-      unless @info
-        response = api.players_info([@id.to_s])
-        unless response.instance_of?(Wot::Error)
-          @info = response[@id.to_s]
-        end
-      end
+      @info ||= Wot::Player::Info.new(self, @api)
       return @info
     end
 
     private
-
-    def api
-      return @api
-    end
 
     def method_missing(method_name, *args, &block)
       info
