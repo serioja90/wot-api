@@ -2,7 +2,14 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-07 22:51:01
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-22 23:40:35
+# @Last Modified time: 2014-07-23 01:46:21
+
+require 'wot-api/player'
+require 'wot-api/vehicle'
+require 'wot-api/player_achievement'
+require 'wot-api/achievement'
+require 'wot-api/player_info'
+
 module Wot
   module Parser
     module_function
@@ -49,10 +56,3 @@ module Wot
     end
   end
 end
-
-require 'wot-api/error'
-require 'wot-api/player'
-require 'wot-api/vehicle'
-require 'wot-api/achievement'
-require 'wot-api/player_achievement'
-require 'wot-api/player_info'

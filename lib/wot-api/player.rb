@@ -2,7 +2,10 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-15 00:31:56
+# @Last Modified time: 2014-07-23 01:46:55
+
+require 'wot-api/error'
+
 module Wot
   class Player
     attr_accessor :id, :nickname
@@ -48,5 +51,3 @@ module Wot
     end
   end
 end
-
-require 'wot-api/error'

@@ -2,7 +2,10 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-15 00:13:51
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-22 00:29:02
+# @Last Modified time: 2014-07-23 01:47:16
+
+require 'wot-api/player_statistics'
+
 module Wot
   class PlayerInfo
     def initialize(data)
@@ -46,5 +49,3 @@ module Wot
     end
   end
 end
-
-require 'wot-api/player_statistics'

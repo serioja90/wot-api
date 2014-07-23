@@ -2,7 +2,10 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-08 00:34:29
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-08 01:31:00
+# @Last Modified time: 2014-07-23 01:47:27
+
+require 'wot-api/statistics'
+
 module Wot
   class PlayerStatistics
     attr_accessor :max_damage, :max_xp, :all, :clan, :company, :historical
@@ -20,5 +23,3 @@ module Wot
     end
   end
 end
-
-require 'wot-api/statistics'

@@ -2,16 +2,14 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-09 01:27:58
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-22 23:27:13
-module Wot
-  class VehicleInfo
-    def initialize(data,api)
-      @data = data
-      @api = api
-    end
+# @Last Modified time: 2014-07-23 01:50:30
 
-    def data
-      return @data
+require 'wot-api/info'
+
+module Wot
+  class VehicleInfo < Wot::Info
+    def initialize(data,api)
+      super data, api
     end
 
     def chassis
@@ -30,20 +28,6 @@ module Wot
     end
 
     def turrets
-    end
-
-    def respond_to?(method_name)
-      return @data.keys.include? method_name
-    end
-
-    private
-
-    def api
-      return api
-    end
-
-    def method_missing(method_name, *args, &block)
-      return @data[method_name]
     end
   end
 end

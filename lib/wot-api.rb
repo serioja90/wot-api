@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-22 23:43:31
+# @Last Modified time: 2014-07-23 01:45:31
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -103,8 +103,6 @@ module Wot
     def turrets_list
     end
 
-    private
-
     def make_request(suffix,parameters)
       params = {:params => parameters.dup}
       params[:params][:application_id] = @app_id
@@ -119,7 +117,6 @@ module Wot
     end
   end
 end
-
 
 require 'wot-api/clusters'
 require 'wot-api/parser'

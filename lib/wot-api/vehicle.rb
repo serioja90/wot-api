@@ -2,7 +2,11 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-09 01:14:08
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-10 02:01:01
+# @Last Modified time: 2014-07-23 02:46:01
+
+require 'wot-api/error'
+require 'wot-api/vehicle_info'
+
 module Wot
   class Vehicle
     attr_accessor :id, :mark_of_mastery, :battles, :wins
@@ -19,12 +23,6 @@ module Wot
       return @info && @info.respond_to?(method_name)
     end
 
-    private
-
-    def api
-      return @api
-    end
-
     def info
       unless @info
         response = api.tank_info @id
@@ -34,12 +32,15 @@ module Wot
       return @info
     end
 
+    private
+
+    def api
+      return @api
+    end
+
     def method_missing(method_name, *args, &block)
       info
       return @info.send method_name unless @info.nil?
     end
   end
 end
-
-require 'wot-api/error'
-require 'wot-api/vehicle_info'
