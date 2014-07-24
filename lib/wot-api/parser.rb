@@ -2,10 +2,9 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-07 22:51:01
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 23:28:21
+# @Last Modified time: 2014-07-25 00:22:37
 
 require 'wot-api/player'
-require 'wot-api/player_achievement'
 require 'wot-api/achievement'
 
 module Wot
@@ -19,15 +18,6 @@ module Wot
         list << Wot::Player.new(item,api)
       end
       return list
-    end
-
-    def get_player_achievements(data,api)
-      achievements = []
-      max_series = data[:max_series]
-      data[:achievements].each do |name,count|
-        achievements << Wot::PlayerAchievement.new(name,count,max_series[name],api)
-      end
-      return achievements
     end
 
     def get_achievements_list(data)

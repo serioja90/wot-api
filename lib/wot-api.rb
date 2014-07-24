@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 23:24:34
+# @Last Modified time: 2014-07-24 23:58:05
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -38,8 +38,7 @@ module Wot
     end
 
     def player_achievements(account_id)
-      response = make_request "account/achievements/", {:account_id => account_id}
-      return Wot::Parser.get_player_achievements(response[:data][account_id.to_s],self)
+      return make_request "account/achievements/", {:account_id => account_id}
     end
 
     def player_stats(account_id,hours_ago)

@@ -2,7 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 23:34:13
+# @Last Modified time: 2014-07-24 23:55:23
 
 module Wot
   class Player
@@ -26,9 +26,7 @@ module Wot
     end
 
     def achievements
-      unless @achievements
-        @achievements = api.player_achievements(@id)
-      end
+      @achievements ||= Wot::Player::Achievement.get_achievements(self,@api)
       return @achievements
     end
 
