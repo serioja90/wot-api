@@ -2,9 +2,7 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 01:42:51
-
-require 'wot-api/error'
+# @Last Modified time: 2014-07-24 23:34:13
 
 module Wot
   class Player
@@ -22,11 +20,9 @@ module Wot
       @nickname = options[:nickname]
     end
 
-    def vehicles
-      unless @vehicles
-        @vehicles = api.player_vehicles(@id)
-      end
-      return @vehicles
+    def tanks
+      @tanks ||= Wot::Player::Tank.get_tanks(self,@api)
+      return @tanks
     end
 
     def achievements

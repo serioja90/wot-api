@@ -2,10 +2,9 @@
 # @Author: Groza Sergiu
 # @Date:   2014-07-07 22:51:01
 # @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-23 01:46:21
+# @Last Modified time: 2014-07-24 23:28:21
 
 require 'wot-api/player'
-require 'wot-api/vehicle'
 require 'wot-api/player_achievement'
 require 'wot-api/achievement'
 
@@ -20,14 +19,6 @@ module Wot
         list << Wot::Player.new(item,api)
       end
       return list
-    end
-
-    def get_player_vehicles(data,api)
-      vehicles = []
-      data.each do |item|
-        vehicles << Wot::Vehicle.new(item,api)
-      end
-      return vehicles
     end
 
     def get_player_achievements(data,api)
