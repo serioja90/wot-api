@@ -1,8 +1,4 @@
-#!/usr/bin/ruby
-# @Author: Groza Sergiu
-# @Date:   2014-07-01 01:03:10
-# @Last Modified by:   sergiu
-# @Last Modified time: 2014-07-30 00:05:15
+
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -65,18 +61,23 @@ module Wot
     end
 
     def engines_list()
+      raise NotImplementedError
     end
 
     def guns_list()
+      raise NotImplementedError
     end
 
     def radios_list()
+      raise NotImplementedError
     end
 
     def suspensions_list()
+      raise NotImplementedError
     end
 
     def turrets_list
+      raise NotImplementedError
     end
 
     def make_request(suffix,parameters)

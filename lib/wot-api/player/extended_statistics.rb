@@ -1,8 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Groza Sergiu
-# @Date:   2014-07-24 01:26:14
-# @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 01:37:01
 
 module Wot
   class Player
