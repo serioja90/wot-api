@@ -19,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
 require 'wot-api'
 
 # create a new instance of api
@@ -43,7 +43,6 @@ players.each do |player|
     
     # get player's achievements
     achievements = player.achievements
-    
 end
 ```
 
