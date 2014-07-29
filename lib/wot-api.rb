@@ -1,14 +1,17 @@
 #!/usr/bin/ruby
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:03:10
-# @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 23:58:05
+# @Last Modified by:   sergiu
+# @Last Modified time: 2014-07-30 00:05:15
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
 
 module Wot
+  autoload :Player,       'wot-api/player'
+  
   class Api
+
     def initialize(region, language = 'en')
       cluster = Wot::cluster(region)
       @app_id = cluster[:application_id]
@@ -16,16 +19,12 @@ module Wot
       @language = language
     end
 
-    def search(username)
-      response = make_request "account/list/", {:search => username}
-      return Wot::Parser.get_players_list(response[:data],self)
+    def search(username, options = {})
+      return Wot::Player.search self, username, options
     end
 
-    def find(account_ids)
-      ids = (account_ids.class == Array ? account_ids : [account_ids])
-      fields = [:account_id, :nickname]
-      response = make_request "account/info/", {:account_id => ids.join(","), :fields => fields.join(",")}
-      return Wot::Parser.get_players_list(response[:data].values,self)
+    def find(account_ids, options = {})
+      return Wot::Player.find self, account_ids, options
     end
 
     def players_info(account_ids)
@@ -93,6 +92,5 @@ module Wot
 end
 
 require 'wot-api/clusters'
-require 'wot-api/parser'
 require 'wot-api/error'
 require 'wot-api/version'

@@ -1,8 +1,8 @@
 #!/usr/bin/ruby
 # @Author: Groza Sergiu
 # @Date:   2014-07-01 01:20:11
-# @Last Modified by:   Groza Sergiu
-# @Last Modified time: 2014-07-24 23:55:23
+# @Last Modified by:   sergiu
+# @Last Modified time: 2014-07-30 00:06:08
 
 module Wot
   class Player
@@ -13,7 +13,33 @@ module Wot
     autoload :ExtendedStatistics,     'wot-api/player/extended_statistics'
 
     attr_accessor :id, :account_id, :nickname, :api
-    def initialize(options,api)
+
+    def self.search(api, nickname, options = {})
+      parameters = {search: nickname}
+      parameters = parameters.merge options
+      response = api.make_request 'account/list/', parameters
+      return create_players_from_data response[:data], api
+    end
+
+    def self.find(api, account_ids, options = {})
+      parameters = {
+        account_id: (account_ids.class == Array ? account_ids : [account_ids]),
+        fields: 'account_id,nickname'
+      }
+      parameters = parameters.merge options
+      response = api.make_request 'account/info/', parameters
+      return create_players_from_data response[:data].values, api
+    end
+
+    def self.create_players_from_data(data,api)
+      players = []
+      data.each do |item|
+        players << Wot::Player.new(item, api)
+      end
+      return players
+    end
+
+    def initialize(options, api)
       @api = api
       @id = options[:account_id]
       @account_id = @id
