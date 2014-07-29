@@ -1,7 +1,7 @@
 
 module Wot
   class Api
-    VERSION = "0.1.0"
+    VERSION = "1.0.0"
 
     def self.version
       return VERSION
