@@ -1,11 +1,30 @@
-wot-api
-=======
+Wot::Api
+========
 
 A simple library that allows to interface with World of Tanks API v2.0!
 
-Installation
+## Installation
 
-From command line run
-```
-gem install wot-api
-```
+Add this line to your application's Gemfile:
+
+    gem 'wot-api'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install wot-api
+
+## Usage
+
+TODO: Write usage instructions here
+
+## Contributing
+
+1. Fork it ( https://github.com/[my-github-username]/wot-api/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
