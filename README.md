@@ -20,7 +20,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-require 'wot-api'
+require 'wot/api'
 
 # create a new instance of api
 api = Wot::Api.new("EU")
