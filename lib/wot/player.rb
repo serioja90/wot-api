@@ -1,12 +1,10 @@
-
+require 'wot/player/info'
+require 'wot/player/tank'
+require 'wot/player/achievement'
+require 'wot/player/statistics'
+require 'wot/player/extended_statistics'
 module Wot
   class Player
-    autoload :Info,                   'wot-api/player/info'
-    autoload :Tank,                   'wot-api/player/tank'
-    autoload :Achievement,            'wot-api/player/achievement'
-    autoload :Statistics,             'wot-api/player/statistics'
-    autoload :ExtendedStatistics,     'wot-api/player/extended_statistics'
-
     attr_accessor :id, :account_id, :nickname, :api
 
     def self.search(api, nickname, options = {})
