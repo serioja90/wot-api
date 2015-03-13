@@ -24,7 +24,7 @@ module Wot
     }
 
     def self.cluster(region)
-      cluster = CLUSTERS[region.to_s]
+      cluster = CLUSTERS[region.to_s.upcase]
       fail "Region '#{region}' not found!" if cluster.nil?
       return cluster
     end
