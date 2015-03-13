@@ -3,23 +3,19 @@ module Wot
   class Player
     class Tank
 
-      attr_accessor :data, :id, :mark_of_mastery, :battles, :wins
+      attr_accessor :player, :data, :id, :mark_of_mastery, :battles, :win
 
-      def self.get_tanks(player,api)
-        tanks = []
-        response = api.player_tanks(player.id)
-        response[:data][player.id.to_s].each do |item|
-          tanks << Wot::Player::Tank.new(item)
-        end
-        return tanks
+      def initialize(player, data)
+        @player          = player
+        @data            = data
+        @id              = data[:tank_id]
+        @mark_of_mastery = data[:mark_of_mastery]
+        @battles         = data[:statistics][:battles]
+        @wins            = data[:statistics][:wins]
       end
 
-      def initialize(data)
-        @data = data
-        @id = @data[:tank_id]
-        @mark_of_mastery = @data[:mark_of_mastery]
-        @battles = @data[:statistics][:battles]
-        @wins = @data[:statistics][:wins]
+      def api
+        @player.api
       end
     end
   end

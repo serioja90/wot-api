@@ -2,31 +2,25 @@
 module Wot
   class Player
     class Info
-      attr_accessor :player, :data, :api
+      attr_accessor :player, :data, :account_id, :nickname, :clan_id, :global_rating, :language,
+                    :last_battle_time, :logout_at, :created_at, :updated_at
 
-      def initialize(player, api)
-        @player = player
-        @api = api
-        response = api.players_info(player.id)
-        @data = response[:data][player.id.to_s]
-        @data.each do |key,_|
-          self.send key
-        end
+      def initialize(player, data)
+        @player           = player
+        @data             = data
+        @account_id       = player.id
+        @nickname         = player.nickname
+        @clan_id          = data[:clan_id]
+        @global_rating    = data[:global_rating]
+        @language         = data[:client_language]
+        @last_battle_time = Time.at(data[:last_battle_time])
+        @logout_at        = Time.at(data[:logout_at])
+        @created_at       = Time.at(data[:created_at])
+        @updated_at       = Time.at(data[:updated_at])
       end
 
-      def statistics
-        @statistics ||= Wot::Player::Statistics.new(@data[:statistics])
-        return @statistics
-      end
-
-      protected
-
-      def method_missing(method_name, *args, &block)
-        self.class.instance_eval do
-          define_method method_name do 
-            return @data[method_name]
-          end
-        end
+      def api
+        @player.api
       end
     end
   end
