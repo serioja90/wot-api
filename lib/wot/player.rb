@@ -34,18 +34,16 @@ module Wot
     def self.search(api, nickname, options = {})
       parameters = {search: nickname}
       parameters = parameters.merge options
-      response = api.make_request :account, :list, parameters
+      response   = api.make_request :account, :list, parameters
       return create_players_from_data response[:data], api
     end
 
     # Find a player or a list of players by their id
     def self.find(api, account_ids, options = {})
-      parameters = {
-        account_id: (account_ids.class == Array ? account_ids : [account_ids]),
-        fields: 'account_id,nickname'
-      }
+      ids = (account_ids.class == Array ? account_ids : [account_ids]).join(',')
+      parameters = { account_id: ids }
       parameters = parameters.merge options
-      response = api.make_request :account, :info, parameters
+      response   = api.make_request :account, :info, parameters
       return create_players_from_data response[:data].values, api
     end
 
@@ -75,10 +73,7 @@ module Wot
 
     def get_info
       fields = %w(clan_id global_rating client_language last_battle_time logout_at created_at updated_at)
-      response = @api.make_request :account, :info, {
-        account_id: @id,
-        fields: fields.join(',')
-      }
+      response = @api.make_request :account, :info, { account_id: @id, fields: fields.join(',') }
 
       Wot::Player::Info.new(self, response[:data][@id.to_s])
     end
@@ -96,11 +91,6 @@ module Wot
         players << Wot::Player.new(item, api)
       end
       return players
-    end
-
-    def method_missing(method_name, *args, &block)
-      info
-      return @info.send method_name
     end
   end
 end

@@ -22,18 +22,16 @@ module Wot
       @language = LANGUAGES.include?(language.to_s.downcase) ? language.to_s.downcase : 'en'
     end
 
-    def player(nickname)
-      options = { type: 'exact' }
-
+    # Find a player by its nickname
+    def player(nickname, options = {})
+      options = options.dup.nested_under_indifferent_access
+      options['type'] ||= 'exact'
       Wot::Player.search(self, nickname, options).first
     end
 
-    def search(username, options = {})
-      return Wot::Player.search self, username, options
-    end
-
-    def find(account_ids, options = {})
-      return Wot::Player.find self, account_ids, options
+    # Find a list of players by their ids
+    def players(ids, options = {})
+      Wot::Player.find(self, ids, options)
     end
 
     def achievements_list()

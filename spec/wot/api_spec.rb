@@ -26,4 +26,16 @@ describe Wot::Api do
     expect(info).not_to be nil
     expect(stats).not_to be nil
   end
+
+  it 'should find a player by id' do
+    api     = Wot::Api.new("RU")
+    player  = api.player("serioja90")
+    players = api.players(player.id)
+    expect(players).not_to be nil
+    expect(players).not_to be_empty
+
+    players = api.players([player.id])
+    expect(players).not_to be nil
+    expect(players).not_to be_empty
+  end
 end
