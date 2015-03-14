@@ -7,26 +7,43 @@ A simple library that allows to interface with World of Tanks API v2.0!
 
 Add this line to your application's Gemfile:
 
-    gem 'wot-api'
+```ruby
+gem 'wot-api'
+```
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install wot-api
+```bash
+$ gem install wot-api
+```
 
 ## Usage
+
+First of all, you have to create a new instance of `Wot::Api`, so you have to do:
 
 ```ruby
 require 'wot/api'
 
-# create a new instance of api
-api = Wot::Api.new("EU")
+region   = "EU" # valid regions are ['RU', 'EU', 'NA', 'ASIA', 'KR']
+language = "en" # if not specified or not supported, the default language will be 'en'
 
+api = Wot::Api.new(region, language)
+```
+
+Now, you can use the `api` object to query World of Tanks via API:
+
+```ruby
 # search players by nickname
-players = api.search("my-nickname")
+players = api.player("my-nickname")
+
+# search players by id
+players = api.players([12345, 23456, ...])
 
 # iterate found players and get detailed info
 players.each do |player|
