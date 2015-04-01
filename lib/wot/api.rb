@@ -6,7 +6,7 @@ require 'wot/api/version'
 require 'wot/api/endpoints'
 require 'wot/api/helper'
 require 'wot/api/error'
-require 'wot/player'
+require 'wot/api/player'
 require 'wot/tank'
 
 module Wot
@@ -23,16 +23,33 @@ module Wot
       @language = LANGUAGES.include?(language.to_s.downcase) ? language.to_s.downcase : 'en'
     end
 
-    # Find a player by its nickname
-    def player(nickname, options = {})
-      options = options.dup.nested_under_indifferent_access
-      options['type'] ||= 'exact'
-      Wot::Player.search(self, nickname, options).first
-    end
+    def players
+      def self.search(nickname, params = {}, type = 'exact')
+        params = params.dup.nested_under_indifferent_access
+        params['type']   = type || 'exact'
+        params['search'] = nickname
+        data = make_request :account, :list, params
 
-    # Find a list of players by their ids
-    def players(ids, options = {})
-      Wot::Player.find(self, ids, options)
+        parse_response(data, Wot::Api::Player)
+      end
+
+      def self.list(ids, options = {})
+      end
+
+      def self.info(id)
+        fields = %w(clan_id global_rating client_language last_battle_time logout_at created_at updated_at)
+        data = make_request :account, :info, { account_id: id, fields: fields.join(',') }
+
+        parse_response(data[id.to_s], Wot::Api::Player::Info)
+      end
+
+      def self.tanks(id)
+        data = make_request :account, :tanks, { account_id: id }
+
+        parse_response(data[id.to_s], Wot::Api::Player::Tank)
+      end
+
+      self
     end
 
     # Returns a list of tanks

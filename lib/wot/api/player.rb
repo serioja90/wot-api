@@ -1,21 +1,22 @@
-require 'wot/player/info'
-require 'wot/player/tank'
+
 require 'wot/player/achievement'
 require 'wot/player/statistics'
 require 'wot/player/extended_statistics'
-module Wot
-  class Player
-    attr_accessor :id, :account_id, :nickname, :api
 
-    def initialize(options, api)
+module Wot
+  class Api::Player
+    require 'wot/api/player/info'
+    require 'wot/api/player/tank'
+
+    attr_accessor :api, :data
+
+    def initialize(api, data)
       @api = api
-      @id = options[:account_id]
-      @account_id = @id
-      @nickname = options[:nickname]
+      @data = data
     end
 
     def tanks
-      @tanks ||= get_tanks
+      @tanks ||= @api.players::tanks(self.account_id)
     end
 
     def achievements
@@ -23,19 +24,11 @@ module Wot
     end
 
     def info
-      @info ||= get_info
+      @info ||= @api.players::info(self.account_id)
     end
 
     def stats
       @stats ||= get_stats
-    end
-
-    # Search a list of players by nickname
-    def self.search(api, nickname, options = {})
-      parameters = {search: nickname}
-      parameters = parameters.merge options
-      response   = api.make_request :account, :list, parameters
-      return create_players_from_data response[:data], api
     end
 
     # Find a player or a list of players by their id
@@ -48,6 +41,14 @@ module Wot
     end
 
     private
+
+    def method_missing(name, *args, &block)
+      if @data.keys.include?(name.to_s)
+        @data[name]
+      else
+        super name, *args, &block
+      end
+    end
 
     def get_tanks
       tanks = []
@@ -69,13 +70,6 @@ module Wot
       end
 
       achievements
-    end
-
-    def get_info
-      fields = %w(clan_id global_rating client_language last_battle_time logout_at created_at updated_at)
-      response = @api.make_request :account, :info, { account_id: @id, fields: fields.join(',') }
-
-      Wot::Player::Info.new(self, response[:data][@id.to_s])
     end
 
     def get_stats
