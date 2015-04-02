@@ -1,6 +1,7 @@
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/inflector'
 require 'wot/api/clusters'
 require 'wot/api/version'
 require 'wot/api/endpoints'
@@ -30,10 +31,15 @@ module Wot
         params['search'] = nickname
         data = make_request :account, :list, params
 
-        parse_response(data, Wot::Api::Player)
+        result = parse_response(data, Wot::Api::Player)
+        return params['type']['exact'] ? result.first : result
       end
 
-      def self.list(ids, options = {})
+      def self.list(ids, params = {})
+        params['account_id'] = (ids.class == Array ? ids : [ids]).join(',')
+        data = make_request :account, :list, params
+
+        parse_response(data, Wot::Api::Player)
       end
 
       def self.info(id)
@@ -47,6 +53,20 @@ module Wot
         data = make_request :account, :tanks, { account_id: id }
 
         parse_response(data[id.to_s], Wot::Api::Player::Tank)
+      end
+
+      def self.achievements(id)
+        data     = []
+        response     = make_request :account, :achievements, { account_id: id }
+        names        = response[id.to_s].map{ |category, items | items.keys }.flatten.uniq
+        achievements = response[id.to_s][:achievements]
+        frags        = response[id.to_s][:frags]
+        max_series   = response[id.to_s][:max_series]
+        names.each do |name|
+          data << {name: name, current: achievements[name], frags: frags[name], max: max_series[name]}
+        end
+
+        parse_response(data, Wot::Api::Player::Achievement)
       end
 
       self
