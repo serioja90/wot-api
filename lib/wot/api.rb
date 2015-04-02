@@ -72,7 +72,7 @@ module Wot
       def self.stats(id)
         request = make_request :account, :info, { account_id: id, fields: 'statistics' }
         data = request[id.to_s][:statistics]
-        
+
         parse_response(data, Wot::Api::Player::Statistics)
       end
 
@@ -84,7 +84,7 @@ module Wot
     def tanks(options = {})
       tanks = []
       response = make_request :encyclopedia, :tanks, options
-      response[:data].each do |id, data|
+      response.each do |id, data|
         tanks << Wot::Tank.new(self, data)
       end
 
@@ -114,7 +114,5 @@ module Wot
     def turrets_list
       raise NotImplementedError
     end
-
-    
   end
 end
