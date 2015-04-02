@@ -69,6 +69,13 @@ module Wot
         parse_response(data, Wot::Api::Player::Achievement)
       end
 
+      def self.stats(id)
+        request = make_request :account, :info, { account_id: id, fields: 'statistics' }
+        data = request[id.to_s][:statistics]
+        
+        parse_response(data, Wot::Api::Player::Statistics)
+      end
+
       self
     end
 

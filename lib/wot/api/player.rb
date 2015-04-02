@@ -1,12 +1,10 @@
 
-require 'wot/player/statistics'
-require 'wot/player/extended_statistics'
-
 module Wot
   class Api::Player
     require 'wot/api/player/info'
     require 'wot/api/player/tank'
     require 'wot/api/player/achievement'
+    require 'wot/api/player/statistics'
 
     attr_accessor :api, :data
 
@@ -32,7 +30,7 @@ module Wot
     end
 
     def stats
-      @stats ||= get_stats
+      @stats ||= @api.players::stats(self.id)
     end
 
     private
@@ -43,12 +41,6 @@ module Wot
       else
         super name, *args, &block
       end
-    end
-
-    def get_stats
-      response = @api.make_request :account, :info, { account_id: @id, fields: 'statistics' }
-
-      Wot::Player::Statistics.new(self, response[:data][@id.to_s][:statistics])
     end
   end
 end
