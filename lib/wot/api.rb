@@ -36,10 +36,9 @@ module Wot
       end
 
       def self.info(id)
-        params['account_id'] = id
-        params['fields'] = %w(clan_id global_rating client_language last_battle_time logout_at
-                              created_at updated_at).join(',')
-        data = make_request :account, :info, params
+        fields = %w(clan_id global_rating client_language last_battle_time
+                    logout_at created_at updated_at).join(',')
+        data = make_request :account, :info, { account_id: id, fields: fields}
 
         parse_response(data[id.to_s], Wot::Api::Player::Info)
       end
