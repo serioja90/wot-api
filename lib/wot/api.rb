@@ -35,16 +35,11 @@ module Wot
         return params['type']['exact'] ? result.first : result
       end
 
-      def self.list(ids, params = {})
-        params['account_id'] = (ids.class == Array ? ids : [ids]).join(',')
-        data = make_request :account, :list, params
-
-        parse_response(data, Wot::Api::Player)
-      end
-
       def self.info(id)
-        fields = %w(clan_id global_rating client_language last_battle_time logout_at created_at updated_at)
-        data = make_request :account, :info, { account_id: id, fields: fields.join(',') }
+        params['account_id'] = id
+        params['fields'] = %w(clan_id global_rating client_language last_battle_time logout_at
+                              created_at updated_at).join(',')
+        data = make_request :account, :info, params
 
         parse_response(data[id.to_s], Wot::Api::Player::Info)
       end
