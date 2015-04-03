@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/list/?application_id=171745d21f7f98fd8878771da1000a31&language=en&search=serioja90&type=exact
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Connection:
+      - keep-alive
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - '"1b67c668c5f79415e862097d176d5508"'
+      Date:
+      - Fri, 03 Apr 2015 00:08:53 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status":"ok","count":1,"meta":{"count":1},"data":[{"nickname":"serioja90","id":null,"account_id":231205}]}'
+    http_version: 
+  recorded_at: Fri, 03 Apr 2015 00:08:52 GMT
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/achievements/?account_id=231205&application_id=171745d21f7f98fd8878771da1000a31&language=en
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - W/"1a46b3889a5185c68c61b39e62dffb32"
+      Date:
+      - Fri, 03 Apr 2015 00:08:53 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA31UTW/bMAz9Lz7nkDhN0+TWps02tEUKrFiPA2MzNWFZ8igp
+        /UL/+yjabrIWWC4x6afHR/LJb5kPEKLPlpmrs1FWuGhDtpyMsgYDZMu3j8z7
+        KCuhS+XTST6epScoKsI9NmiDT3GDJZgVMCVGJZH4Oxhn0WoCqEHOliejjOwe
+        Sn2e9bg1lCSoXFDcOL4j5CIBpuMecFWT7Xld9LgFiwrfOb6HIlABZtMiQyCX
+        cFJk65otcEmJZpBzwdE6IQ/sDslreNHgCZjJCXp+Kv1GNOSl+elUAtyhVcH5
+        IPgGV0Y0qoYSG2coVRYeiX1sW8dBC8/nEgdE8wTGCHo6/yCo9uANUHUk5XzL
+        0Hgl7fW6UCH7H/acUz6d1gFhuVZ1A/DOtS2aA9Ed+CIWBWXLWVqs/RORU2vS
+        DEtjsDW4cg3LFjRHTYtWppLyQiJnTCzql0vck1GKBsh+i9Lf6dkoq8CWm90l
+        QqgkIf2RBUq9ySsxjG+gW7i31KYhzMZ5WofFgqOvdCxjeR0oGPw5YIbBrjgW
+        JH/OBqZt7Keahizl7hmKOlsuRDE7ewv9wPXgA4Ugla1KEmN2x7YQpMpKtvM6
+        ZBB8SDpViGiuoaEaXpOfkiqw9dWzaAq5wg/x5FM8PmoyPxJyA3smMX3tdD9F
+        JRvDshtrt1UyxoWAatMdPVYqJR+n3XpndbGDTa6dcWJ2t++KhciluPVkqLVh
+        Q7WW8c4kr292a7FetB156K/GBSPUoWIXHyt94eVqp5sto3pYr/Lx5KTjr5wL
+        9+6a1KuTRV/lMjYUOCokWQJfhP4saWcfbpEpHN0m0d9ZUb4aO4ZH/Th8GvrJ
+        4sg1M1Hfypqc/SV3BKW92eI9We75txduVIKvn4XD5+SLkT57xe7JFqTenv5n
+        KDI/2VWpZ/71+Lv8/gJfILaCLwUAAA==
+    http_version: 
+  recorded_at: Fri, 03 Apr 2015 00:08:53 GMT
+recorded_with: VCR 2.9.3
