@@ -26,6 +26,18 @@ module Wot
       @historical ||= Wot::Api::Player::Statistics::Extended.new(@api, @data[:historical])
     end
 
+    def stronghold_defense
+      @stronghold_defense ||= Wot::Api::Player::Statistics::Extended.new(@api, @data[:stronghold_defense])
+    end
+
+    def stronghold_skirmish
+      @stronghold_skirmish ||= Wot::Api::Player::Statistics::Extended.new(@api, @data[:stronghold_skirmish])
+    end
+
+    def team
+      @team ||= Wot::Api::Player::Statistics::Extended.new(@api, @data[:team])
+    end
+
     private
 
     def method_missing(name, *args, &block)
