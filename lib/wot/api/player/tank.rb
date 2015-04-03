@@ -8,6 +8,10 @@ module Wot
       @data = data
     end
 
+    def id
+      self.tank_id
+    end
+
     def battles
       @data[:statistics][:battles]
     end
