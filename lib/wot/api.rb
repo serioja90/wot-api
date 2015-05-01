@@ -1,13 +1,14 @@
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/inflector'
 require 'wot/api/clusters'
 require 'wot/api/version'
 require 'wot/api/endpoints'
 require 'wot/api/helper'
 require 'wot/api/error'
-require 'wot/player'
-require 'wot/tank'
+require 'wot/api/player'
+require 'wot/api/tank'
 
 module Wot
   class Api
@@ -23,28 +24,67 @@ module Wot
       @language = LANGUAGES.include?(language.to_s.downcase) ? language.to_s.downcase : 'en'
     end
 
-    # Find a player by its nickname
-    def player(nickname, options = {})
-      options = options.dup.nested_under_indifferent_access
-      options['type'] ||= 'exact'
-      Wot::Player.search(self, nickname, options).first
-    end
+    def players
+      def self.search(nickname, params = {}, type = 'exact')
+        params = params.dup.nested_under_indifferent_access
+        params['type']   = type || 'exact'
+        params['search'] = nickname
+        data = make_request :account, :list, params
 
-    # Find a list of players by their ids
-    def players(ids, options = {})
-      Wot::Player.find(self, ids, options)
-    end
-
-    # Returns a list of tanks
-    # TODO: implement a cache system
-    def tanks(options = {})
-      tanks = []
-      response = make_request :encyclopedia, :tanks, options
-      response[:data].each do |id, data|
-        tanks << Wot::Tank.new(self, data)
+        result = parse_response(data, Wot::Api::Player)
+        return params['type']['exact'] ? result.first : result
       end
 
-      tanks
+      def self.info(id)
+        fields = %w(clan_id global_rating client_language last_battle_time
+                    logout_at created_at updated_at).join(',')
+        data = make_request :account, :info, { account_id: id, fields: fields}
+
+        parse_response(data[id.to_s], Wot::Api::Player::Info)
+      end
+
+      def self.tanks(id)
+        data = make_request :account, :tanks, { account_id: id }
+
+        parse_response(data[id.to_s], Wot::Api::Player::Tank)
+      end
+
+      def self.achievements(id)
+        data     = []
+        response     = make_request :account, :achievements, { account_id: id }
+        names        = response[id.to_s].map{ |category, items | items.keys }.flatten.uniq
+        achievements = response[id.to_s][:achievements]
+        frags        = response[id.to_s][:frags]
+        max_series   = response[id.to_s][:max_series]
+        names.each do |name|
+          data << {name: name, current: achievements[name], frags: frags[name], max: max_series[name]}
+        end
+
+        parse_response(data, Wot::Api::Player::Achievement)
+      end
+
+      def self.stats(id)
+        request = make_request :account, :info, { account_id: id, fields: 'statistics' }
+        data = request[id.to_s][:statistics]
+
+        parse_response(data, Wot::Api::Player::Statistics)
+      end
+
+      self
+    end
+
+    def tanks
+      def list(options = {})
+        data = make_request :encyclopedia, :tanks, options
+        parse_response(data.values, Wot::Api::Tank)
+      end
+
+      def info(id)
+        data = make_request :encyclopedia, :tankinfo, {tank_id: id}
+        parse_response(data[id.to_s], Wot::Api::Tank::Info)
+      end
+
+      self
     end
 
     def achievements_list()
@@ -70,7 +110,5 @@ module Wot
     def turrets_list
       raise NotImplementedError
     end
-
-    
   end
 end

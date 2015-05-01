@@ -10,11 +10,16 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'wot-api'
 ```
+Or if you want to install the gem directly from github, use:
+
+```ruby
+gem 'wot-api', '~> 2.0.0', git: 'git://github.com/serioja90/wot-api.git', branch: 'master'
+```
 
 And then execute:
 
 ```bash
-$ bundle
+$ bundle install
 ```
 
 Or install it yourself as:
@@ -39,29 +44,17 @@ api = Wot::Api.new(region, language)
 Now, you can use the `api` object to query World of Tanks via API:
 
 ```ruby
-# search players by nickname
-players = api.player("my-nickname")
+# find player by nickname
+player  = api.players::search(NICKNAME)                    # return a single result
+players = api.players::search(NICKNAME, {}, 'startswith' ) # returns a list of players
 
-# search players by id
-players = api.players([12345, 23456, ...])
-
-# iterate found players and get detailed info
-players.each do |player|
-    puts player.id
-    
-    # get player's detailed information
-    info = player.info
-    
-    # get player's tanks
-    tanks = player.tanks
-    
-    # get player's statistics
-    statistics = player.statistics
-    
-    # get player's achievements
-    achievements = player.achievements
-end
+player.id           # returns player's ID
+player.info         # returns more details about player
+player.tanks        # returns a list of player's tanks with some statistics
+player.statistics   # returns some statistics about player
+player.achievements # returns a list of player's achievements
 ```
+For more details about OPTIONS and API see [Wargaming API Reference](https://eu.wargaming.net/developers/api_reference/wot/account/list/).
 
 ## Contributing
 

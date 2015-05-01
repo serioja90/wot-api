@@ -1,0 +1,124 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/list/?application_id=171745d21f7f98fd8878771da1000a31&language=en&search=serioja90&type=exact
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Connection:
+      - keep-alive
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - '"1b67c668c5f79415e862097d176d5508"'
+      Date:
+      - Thu, 02 Apr 2015 23:59:01 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status":"ok","count":1,"meta":{"count":1},"data":[{"nickname":"serioja90","id":null,"account_id":231205}]}'
+    http_version: 
+  recorded_at: Thu, 02 Apr 2015 23:59:01 GMT
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/tanks/?account_id=231205&application_id=171745d21f7f98fd8878771da1000a31&language=en
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - W/"a5c835d7e8fff59c30b23b65bf39e33f"
+      Date:
+      - Thu, 02 Apr 2015 23:59:07 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA62a3WokRwyF36Wv56IklerHrxKCmew6YBzbsJ4lBON3T2cD
+        oc4y0ukJvlrWxh9V+tepft/eLufL97ftbnt92k7bl9fvL5ftTk7b88PlvN29
+        //eTj9P29fzvj9REi293v7z/+OvHt8vjl7d/fvHn48v+r2s/bb+dL5c/Hvb/
+        zWn7nz6fvz3dv/5+/3x+uzx8+2u7q6ftcn55un/8uv9B1TE/Ttdppr7Qms5r
+        tLLSmlkE0wEwuQqTBSbiKiGtz4XmvbGL9mk9hLWywprRe1qPYb2uMPFrMIN7
+        9oRWV4dW7exo1Tx2gY4VJoUezbyF0SFjvahNbjWJTyZrcFhT5s4hM4RJX91p
+        Xhis1dI8vqastCo0pdqM3VngaMbvWWvsgN4BRu9pLYOBN1VZbNgssc0auLM4
+        PZmPBLZeU+ekqV5rWDf2mgKwzmHqR2GVZUBrHoaG2Boae31jDhg9cUAdAKMn
+        E9EkBaBuqNOusmdAPwhTGhtqyT0FYcKM1rTMozCaT3srnsk9baVJp8W2jYRW
+        IAmud5XVoeotToLSAEZLmpSkdkuZnAax5p7AIKUKzQKXpHIIGK0cMFrsAAGb
+        lcpsNjXxpqzFVibNAelJuysGMJqdJpbEGZxs0PpYp86jMGqz4RlMAXagCGWw
+        talL5z0lCbMJt+yDRdmsPXTmnJwFgWFWw4N1PBifHUfSA4oDjPpSRzJslLXS
+        7g2eJ5OEITsgLpxuAtrijt7hkjZozS49HpAH+NKoxTyr2Q18qbzIlngI8rWU
+        idC1LgR1yCLhbuxxsHoHFr1gmzELJsY92HhHiitiA2OVzr0YBoSDua63EBhW
+        erwAo7k4ay+fcUBUhFHb7+0vvGTDS/IhqiTLl/ttsFljNQNGYj6rW4mrNDhy
+        HhifRly+6prYs9Cwr4m11kFg0J4m2RJdgTV4NsYDYl0L9KCG92SxtNWHfATo
+        ElfnKhQFJWLEi4MBSmmbTbYGtBWNht6GHLMVF0Ekrqe2xmin/aL3OBggRq/L
+        dmvZmsmuUNfi0I1uCposMbYeq/EROhEAYY9v9FgmSbgr6K90Fpd4ftB1GGk0
+        GjzZESDcOWokKzeaneqR7okeCcfyxmXXpMCDtZyvZ54oayCiO1UoalJJdZ1F
+        auMzYDzpwqkq34xHXGhUKQoNn4l9cCzepC2etsCH1bgPs7UYVPjCF6lMAgbV
+        nKJanD0KyjRdVrwm2tekKIVBPpPfb0JJUv/wgo3r+HGQgnxjjY9ZJUYNeF7g
+        i3AiBE2KWj2okkgaILkbz5xEH5w3oboetZXSYCjJZoEu5IW0Zc8A8D5BF7GW
+        tIpyE8osyRyQGCcXjJORDTTZxufIeciDSnNw9KS4K0VBkUkkDBF4kaDRPo6i
+        Ku/PsdHFKEohQuNtFRRipd2rZi9LSlFgq5akM0f9lM7x4gs5qIW/HsdiCKiJ
+        XM4q41gV5aiWTNxgq+sotFXiwQLSN0NZYqpOSfg1QSJv3nSmNuO6Bwpb5+JT
+        O1T1OCmb2sFOzl+h4jUV7MSzL3YdXI620qFH4+lAV67xCINaMvuoZyQFgZPA
+        eTV9LLrpVCI6jhUXfqzp9jkX1BKfCR4DCrueDT9m9MIH0ETApyRUUBK5aRWu
+        aDVP2tVNIG/tc05kWX9ZJSu+RsYR4AwEWafx/LqGUuMfvsVV3BgIMi77UnDV
+        S+jkOg45jX8AczAeK1dKjt2sUhN5shnD0sFTJFmFlJEUlN1k+F3HOdqd5AhG
+        GEaPZRrl7O07HuQKI0GGxMLwbZw9Zfv/vttPjfJzTuSJYHoTSX58zvLrx8ff
+        a5kmwgMtAAA=
+    http_version: 
+  recorded_at: Thu, 02 Apr 2015 23:59:06 GMT
+recorded_with: VCR 2.9.3

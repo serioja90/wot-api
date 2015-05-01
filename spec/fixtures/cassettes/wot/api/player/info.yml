@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/list/?application_id=171745d21f7f98fd8878771da1000a31&language=en&search=serioja90&type=exact
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Connection:
+      - keep-alive
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - '"1b67c668c5f79415e862097d176d5508"'
+      Date:
+      - Thu, 02 Apr 2015 23:50:00 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status":"ok","count":1,"meta":{"count":1},"data":[{"nickname":"serioja90","id":null,"account_id":231205}]}'
+    http_version: 
+  recorded_at: Thu, 02 Apr 2015 23:49:59 GMT
+- request:
+    method: get
+    uri: http://api.worldoftanks.ru/2.0/account/info/?account_id=231205&application_id=171745d21f7f98fd8878771da1000a31&fields=clan_id,global_rating,client_language,last_battle_time,logout_at,created_at,updated_at&language=en
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '226'
+      Connection:
+      - keep-alive
+      X-Api-Version:
+      - 2.19.0
+      Content-Language:
+      - en
+      Access-Control-Request-Method:
+      - GET, POST
+      Etag:
+      - '"6bf67ba6a238f23c9501ed60ed835a9d"'
+      Date:
+      - Thu, 02 Apr 2015 23:52:55 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status":"ok","count":1,"meta":{"count":1},"data":{"231205":{"client_language":"ru","last_battle_time":1425690290,"created_at":1283723357,"updated_at":1427125087,"global_rating":7412,"clan_id":174800,"logout_at":1425690859}}}'
+    http_version: 
+  recorded_at: Thu, 02 Apr 2015 23:52:55 GMT
+recorded_with: VCR 2.9.3
