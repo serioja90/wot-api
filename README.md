@@ -13,7 +13,7 @@ gem 'wot-api'
 Or if you want to install the gem directly from github, use:
 
 ```ruby
-gem 'wot-api', '~> 2.0.0', git: 'git://github.com/serioja90/wot-api.git', branch: 'master'
+gem 'wot-api', '~> 2.0.0', git: 'git://github.com/serioja90/wot-api.git'
 ```
 
 And then execute:
