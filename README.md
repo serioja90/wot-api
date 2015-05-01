@@ -54,7 +54,8 @@ player.tanks        # returns a list of player's tanks with some statistics
 player.statistics   # returns some statistics about player
 player.achievements # returns a list of player's achievements
 ```
-For more details about OPTIONS and API see [Wargaming API Reference](https://eu.wargaming.net/developers/api_reference/wot/account/list/).
+For more details about available options and API endpoints see
+[Wargaming API Reference](https://eu.wargaming.net/developers/api_reference/wot/account/list/).
 
 ## Contributing
 
