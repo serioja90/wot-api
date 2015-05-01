@@ -21,6 +21,7 @@ describe Wot::Api::Tank do
     expect(tank).not_to be nil
     expect(tank).to be_instance_of Wot::Api::Tank
     expect(tank).to respond_to(:id)
+    expect(tank).to respond_to(:info)
     expect(tank).to respond_to(:premium?)
     expect(tank).to respond_to(:light?)
     expect(tank).to respond_to(:medium?)
