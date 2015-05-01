@@ -8,7 +8,7 @@ require 'wot/api/endpoints'
 require 'wot/api/helper'
 require 'wot/api/error'
 require 'wot/api/player'
-require 'wot/tank'
+require 'wot/api/tank'
 
 module Wot
   class Api
@@ -73,16 +73,18 @@ module Wot
       self
     end
 
-    # Returns a list of tanks
-    # TODO: implement a cache system
-    def tanks(options = {})
-      tanks = []
-      response = make_request :encyclopedia, :tanks, options
-      response.each do |id, data|
-        tanks << Wot::Tank.new(self, data)
+    def tanks
+      def list(options = {})
+        data = make_request :encyclopedia, :tanks, options
+        parse_response(data.values, Wot::Api::Tank)
       end
 
-      tanks
+      def info(id)
+        data = make_request :encyclopedia, :tankinfo, {tank_id: id}
+        parse_response(data[id.to_s], Wot::Api::Tank::Info)
+      end
+
+      self
     end
 
     def achievements_list()
